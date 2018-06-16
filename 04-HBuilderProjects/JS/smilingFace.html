@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>smilingFace</title>
+	</head>
+
+	<body>
+		<div>
+			<label>输入数字:</label>
+			<input id="number1" type="text" />
+			<button onclick='showSmileFace()'>点我打印笑脸</button>
+
+		</div>
+
+		<script>
+			function showSmileFace() {
+				var num = document.getElementById('number1').value;
+				console.log(num)
+				for(num; num > 0; num -= 1) {
+					var i = num * 2 - 1;
+					var line = '';
+					for(i; i > 0; i -= 1) {
+						line += '\u263a'
+					}
+					document.write("<div align='center'>" + line + "</div>")
+				}
+			}
+		</script>
+	</body>
+
+</html>

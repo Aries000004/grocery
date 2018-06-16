@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+
+		<div id="checkbox">
+			<input type="checkbox" />one<br>
+			<input type="checkbox" />two<br>
+			<input type="checkbox" />three<br>
+			<input type="checkbox" />four<br>
+			<input type="checkbox" />five<br>
+		</div>
+
+		<div id="button">
+			<button id="selectAll">全选</button>
+			<button id="cancel">取消</button>
+			<button id="reverse">反选</button>
+		</div>
+
+		<script>
+			
+			
+			function $(id) {
+				return document.getElementById(id)
+			}
+
+			var boxes = document.querySelectorAll('#checkbox>input');
+			$('selectAll').addEventListener('click', function() {
+				for(var i = 0; i < boxes.length; i += 1) {
+					boxes[i].checked = true;
+				}
+			});
+
+			$('cancel').addEventListener('click', function() {
+
+				for(var i = 0; i < boxes.length; i += 1) {
+					boxes[i].checked = false;
+				}
+			})
+
+			$('reverse').addEventListener('click', function() {
+				for(var i = 0; i < boxes.length; i += 1) {
+					boxes[i].checked = !boxes[i].checked;
+
+				}
+
+			})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script>						
+			var hotel = {
+				'state' : false,
+				'room' : 100,
+				'name' : '7Days',
+				'open' : function (){
+					this.state = true;
+				},
+				'close' : function () {
+					this.state = false;
+				},
+				'book' : function (num) {
+					if (this.state = true && this[room] - num > 0) {
+						this.room -= num;
+						alert('预定成功');
+					}else {
+						alert('预定失败')
+					}
+				},
+				'quit' : function (num) {
+					if (this.state = true && num > 0 && this.room + num <= 100) {
+						this.room += num;
+						alert('退房成功')
+					} else {
+						alert('退房失败')
+					}
+				}
+			};
+			hotel.room = 100;
+			hotel.book(3);
+			
+			
+		</script>
+		
+		
+	</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				width: 960px;
+				height: 500px;
+				margin: 0 auto;
+			}
+			#bigBox{				
+				border: 1px solid blueviolet;
+				width: 512px;
+				height: 384px;
+				margin: 100px auto;
+				overflow: hidden;
+			}
+			#adv {
+				position: relative;
+				width: 3072px;
+				height: 384;
+			}
+			#adv img {
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id ='bigBox'>
+			<div id="adv">
+				<img src="img/01.jpg" >
+				<img src="img/02.jpg">
+				<img src="img/03.jpg">
+				<img src="img/04.jpg" >
+				<img src="img/05.jpg" >
+				<img src="img/01.jpg" >
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script>
+			$(function(){
+				var count = 0;// 计数器 当值为20时，表示过了2秒（setInterval为200ms动作）
+				var temp = 0; // 记录图片移动距离
+				var startLeft =  $('#adv').css('left');//开始坐标
+				alert(startLeft)
+				window.setInterval(function(){					
+					if (count == 20){
+						// 当两秒到后 移动装图片的div，在切换图片时不计时(count不增加)
+						var dx= parseInt($('#adv').css('left')) - 32;
+						$('#adv').css('left', dx + 'px');
+						temp +=32;//记录移动距离
+						// 移动到最后一张图片时(temp = 2560)，让图片div回到开始坐标 
+						if (temp == 2560){
+							$('#adv').css('left', startLeft); ;
+							temp = 0;
+							count =1;
+							return;
+						}
+						// 一张图片切换完成后，开始重新计时
+						if (temp % 512 == 0){
+							count =0;
+						}
+					}else{
+						count += 1;
+					}					
+				},100);
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			#ul {
+				margin: 100px;
+				height: 200px;
+			}
+			#ul li {
+				width: 200px;
+				height: 50px;
+				font: 30px/50px Arial;
+				color: red;
+				text-align: center;
+				background-color: darkblue;
+				overflow: hidden;
+			}
+			#ul li:hover {
+				height: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="ul">
+			<li>a
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+			</li>
+			<li>b</li>
+			<li>c</li>
+			<li>d</li>
+		</ul>
+	</body>
+</html>

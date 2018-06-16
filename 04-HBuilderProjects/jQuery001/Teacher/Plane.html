@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.plane {
+				width: 100px;
+				height: 124px;
+				background-image: url(../img/hero1.png);
+				position: fixed;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<script src="../js/jquery1.12.min.js"></script>
+		<script>
+			//构造器函数    创建对象
+			function Plane(x, y, speed) {
+				this.x = x;
+				this.y = y;
+				this.speed = speed;
+				//this.jetting = true;
+			}
+			Plane.foo = function() {
+				alert('Hello')
+			}
+			//绑定原型方法   将不变写在外面   将 变化的 属性写在创建对象里面
+			Plane.prototype.jetting = true;
+			Plane.prototype.init = function() {
+				this.div = $('<div>').addClass('plane').css('left', this.x + 'px').css('top', this.y + 'px');
+				$(document.body).append(this.div);
+			};
+			Plane.prototype.fly = function() {
+				var image = this.jetting ? '../img/hero1.png' : "../img/hero2.png";
+				this.div.css('background-image', 'url(' + image + ')');
+				this.y -= this.speed;
+				this.div.css('top', this.y + 'px');
+				this.jetting = !this.jetting;
+			};
+			//数组删除元素 应该从后面往前删除  避免索引的
+			Plane.prototype.destroy = function() {
+				this.div.remove();
+			}
+			$(function() {
+				var planes = [];
+				for(var i = 0; i < 10; i += 1) {
+					var speed = parseInt(Math.random() * 7 + 2);
+					var plane = new Plane(100 + 120 * i, 560, speed); // 创建对象用 new
+					plane.init();
+					planes[i] = plane;
+				}
+				window.setInterval(function() {
+					for(var i = 0; i < planes.length; i += 1) {
+						planes[i].fly();
+						if(planes[i].y < -124) {
+							planes[i].destroy();
+						}
+					}
+
+				}, 100);
+			})
+		</script>
+	</body>
+
+</html>

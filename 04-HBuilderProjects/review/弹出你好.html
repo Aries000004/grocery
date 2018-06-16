@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id='testBtn'>确定</button>
+		<script src="js/my_js.js"></script>
+		<script>
+			function foo() {
+				alert('你好')
+			};
+			bind($('testBtn') ,'click', foo);
+			bind($('testBtn'), 'click' ,function (evt) {
+				if (window.confirm('不再弹出你好?')) {
+					unbind($('testBtn'), 'click', foo)
+				}
+			});
+		</script>
+	</body>
+</html>

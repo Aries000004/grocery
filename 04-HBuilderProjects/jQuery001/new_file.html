@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id='mm'>
+			<input type="button" value="加载" id='btn' />
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script>
+			$('#btn').on('click', function() {
+				var url = 'http://api.tianapi.com/meinv/?key=30cb00f0e0f6c2f605ba1ebca41c3282&num=2';
+				$.getJSON(url, function(obj) {
+					for (var i = 0; i < obj.newslist.length; i += 1) {
+						$('#mm').append(
+							$('<img>').attr('src', obj.newslist[i].picUrl).attr('width', '300px')
+					)}
+				});
+			});
+		</script>
+	</body>
+</html>

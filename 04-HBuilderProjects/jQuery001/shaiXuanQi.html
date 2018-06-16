@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#data {
+				border-collapse: collapse;
+			}
+			
+			#data td,
+			th {
+				border: 1px solid black;
+				text-align: center;
+				width: 100px;
+				height: 40px;
+			}
+			
+			#data th {
+				color: goldenrod;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<table id="data">
+			<tr>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Grander</th>
+				<th>Address</th>
+				<th>Memo</th>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+			<tr>
+				<td>item 1</td>
+				<td>item 2</td>
+				<td>item 3</td>
+				<td>item 4</td>
+				<td>item 5</td>
+			</tr>
+		</table>
+		<button id="delBtn">删除所有行</button>
+		<button id="clearBtn">删除单元格内容</button>
+		<button id="hrefBtn">添加超链接</button>
+		
+
+		<script src="js/jquery1.12.min.js"></script>
+		<script>
+			$(function() {
+				$("#data tr:odd").css('background-color', 'antiquewhite');
+				$("#data tr:even").css('background-color', 'silver');
+				$("#data tr:first").css("background-color", "white");
+				//$("#data tr:eq(1)").css('background-color', 'springgreen')
+				//$("#data tr:last").css("background-color", "seagreen")
+
+				$("#delBtn").on("click", function() {
+					//$("#data tr:gt(0)").remove();   // 删除大于 0 的
+					$("#data tr:lt(3)").remove(); // 小于3
+				});
+
+				$("#clearBtn").on("click", function() {
+					//$("#data tr:gt(0) td").text("");
+					$("#data td").text("");
+				});
+				
+				$("#hrefBtn").one("click", function () {
+					$("#data td").each(function () {
+						$(this).html( '<a href="">' + $(this).text() + '</a>');
+					});
+				});
+
+			});
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ dnoName }}员工表</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>部门</td>
+            <td>员工名</td>
+        </tr>
+
+        <tr>
+            {% for emp in emp_list %}
+            <td>emp.no</td>
+            <td>emp.name</td>
+            {% endfor %}
+        </tr>
+
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<button id="ok">确定</button>
+		
+		<script src="js/ex03.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			(function () {
+				function foo() {
+					alert('你好!')
+				}
+				$('ok').addEventListener('click', foo);
+				$('ok').addEventListener('click', function () {
+					if (window.confirm('确定??')) {
+						$('ok').removeEventListener('click', foo)
+					}
+				})
+			} ())
+			
+			
+		</script>
+	</body>
+</html>

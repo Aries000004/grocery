@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#plane {
+				
+				width: 120px;
+				height: 140px;
+				background: url(img/hero1.png) no-repeat;
+				position: fixed;
+				top: 500px;
+				left: 400px;
+			}
+		
+		</style>
+	</head>
+	<body>		
+		<div id="plane"></div>
+		
+		<script src="js/jquery1.12.min.js"></script>
+		<script>
+			$(function () {			
+				var counter = 0;
+				var dy = 500;
+				var  timer = window.setInterval(function () {
+					
+					var image = ['url(img/hero1.png) no-repeat', 'url(img/hero2.png) no-repeat'];
+					var backgroundimg = image[counter];
+					$("#plane").css('background', backgroundimg);
+					var position = dy + 'px';
+					$("#plane").css('top', position);
+					dy -= 5;
+					if (dy < 0) {
+						window.clearInterval(timer);
+					}
+					counter += 1;
+					if (counter == 2) {
+						counter = 0;
+					};
+				},100);			
+			});
+			
+		</script>
+	</body>
+</html>

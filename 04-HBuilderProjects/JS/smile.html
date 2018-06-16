@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<label for="">请输入数字:</label>
+		<input type="text" name="" id="number1" value="" />
+		<button onclick="printSmilingFace()">点我打印笑脸</button>
+	
+		<!--<p onclick="printSmilingFace()">点我打印笑脸</p>-->
+		<script>
+			function printSmilingFace() {
+				var Number = document.getElementById('number1').value;
+				for(Number; Number > 0; Number -= 1) {
+					var y = "";
+					var i = Number * 2 - 1;
+					for(i; i > 0; i -= 1) {
+						y += "\u263a";
+					}
+					document.write("<div align='center'>" + y + "</div>");
+				}
+
+			}
+		</script>
+
+	</body>
+
+</html>

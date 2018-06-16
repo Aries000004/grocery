@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<script type="text/javascript">
+			
+			
+
+			function lastNo(carNo)
+			{
+				var len = carNo.length;
+				for (var i = len - 1; i > 0; i -= 1)
+				{
+					var ch = carNo.charAt(i);
+					if (ch >= '0' && ch =< 9='9')
+					{
+						return parseInt(ch);
+					}
+				}return '';
+			}
+			var carNo = prompt('请输入车牌号:');
+
+			var lastNumber = lastNo(carNo);
+			var day = new Date().getDay();
+			if (day > 0 & day < 6)
+			{
+				if (day == lastNumber || day + 5 == lastNumber || lastNumber % 5 == day)
+				{
+					alert('今日限行');
+				}else{
+				alert('今日不限行');}
+			}else{
+			alert('非工作日不限行');}
+		</script>
+	</body>
+</html>

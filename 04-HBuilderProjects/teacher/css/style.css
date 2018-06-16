@@ -1,0 +1,118 @@
+/*样式表  CSS  Cascading Style Sheet*/
+
+
+/*选择器*/
+
+
+/*标签选择器    对所有的h2标签生效  */
+
+h2 {
+	color: red;
+	font: italic 36px Arial, '幼圆';
+	/*顺序*/
+	font-family: Arial, '幼圆';
+	font-size: 32px;
+	/*像素,也可使用厘米等绝对单位*/
+	/*text-align:center;*/
+	/*font-weight:800;/*加粗*/
+	/*font-style:italic;斜体*/
+}
+
+
+/*ID 选择器  只对选中的添加样式*/
+
+
+/* dotted dashed solid*/
+
+
+/*width height 只对块级元素生效  对行级无效*/
+
+#login {
+	width: 300px;
+	height: 200px;
+	border: 3px dotted cornflowerblue;
+	border-radius: 6px 6px 6px 6px;
+}
+
+
+/*类选择器    对所有指定的class 属性生效*/
+
+.foo {
+	/*通过display  设置为 inline-block 可以让行级元素变得像块级元素一样可以设置宽高*/
+	display: inline-block;
+	width: 70px;
+	/*height:10px;*/
+	text-align: right;
+	margin-right: 15px;
+}
+
+.center {
+	text-align: center;
+}
+
+.center>input {
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+	background-color: deepskyblue;
+	font: 16px '幼圆';
+	margin: 10px 10px;
+	border: none;
+	/*去边框*/
+	cursor: pointer;
+	/*鼠标指针变化*/
+}
+
+
+/*鼠标悬停    伪类 */
+
+.center>input:hover {
+	color: red;
+}
+
+.last {
+	margin-top: 30px !important;
+	margin-right: 20px !important;
+	text-align: right;
+}
+
+a {
+	text-decoration: none;
+	color: rgba(255, 100, 100, 0.5);
+	/*a 是阿尔法通道 透明度*/
+}
+
+
+/*放置鼠标变色*/
+
+a:hover {
+	color: red;
+}
+
+
+/*激活   设置*/
+
+a:active {
+	color: orange;
+}
+
+
+/*父子选择器       只选择 login 下面的所有的 div */
+
+#login div {
+	margin: 10px 5px;
+}
+
+
+/*只选择 longin 下面的第一个 div*/
+
+#login>div {}
+
+#login input[type="text"],
+#login input[type="password"] {
+	border: none;
+	border-bottom: 1px solid green;
+	outline: none;
+}
+
+]

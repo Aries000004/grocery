@@ -1,0 +1,25 @@
+<!--ajax-->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id='demo'></div>
+		<script>
+			function Myfunction() {
+				careName = 'Vilvo';
+			}
+			function one() {
+				careName = 'foo';
+			}
+			Myfunction();
+			one();
+			document.getElementById('demo').innerHTML = window.careName;
+		</script>
+	</body>
+
+</html>

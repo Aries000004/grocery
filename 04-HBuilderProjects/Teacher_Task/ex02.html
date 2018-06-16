@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#one,
+			#two {
+				width: 100px;
+				height: 100px;
+				position: fixed;
+				cursor: pointer;
+			}
+			
+			#one {
+				background-color: #F5DEB3;
+				top: 200px;
+				left: 150px;
+			}
+			
+			#two {
+				background-color: blueviolet;
+				top: 300px;
+				right: 150px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="one"></div>
+		<div id="two"></div>
+		<script src='js/func.js'></script>
+		<script>
+			(function() {
+				var isMouseDown = false;
+				var originLeft = 0;
+				var originTop = 0;
+				var mouseX = 0;
+				var mouseY = 0;
+				bind($('one'), 'mousedown', function(evt) {
+					evt = evt || window.event;
+					isMouseDown = true;
+					var divStyle = getStyle($('one'));
+					originLeft = parseInt(divStyle.left);
+					originTop = parseInt(divStyle.top);
+					mouseX = evt.clientX;
+					mouseY = evt.clientY;
+				});
+				bind($('one'), 'mouseup', function() {
+					isMouseDown = false;
+				});
+				bind($('one'), 'mousemove', function(evt) {
+					if(!isMouseDown) return;
+					evt = evt || window.event;
+					var dx = evt.mouseX - mouseX;
+					var dy = evt.mouseY - mouseY;
+					$('one').style.left = parseInt(originLeft + dx) + 'px';
+					$('one').style.top = parseInt(originTop + dy) + 'px';
+				});
+			}());
+		</script>
+	</body>
+
+</html>

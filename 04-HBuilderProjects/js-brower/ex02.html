@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#fruits>li {
+				color: wheat;
+				width: 200px;
+				height: 50px;
+				font: 30px/50px arial, '微软雅黑';
+				text-align: center;
+				background-color: darkblue;
+				border-bottom: 1px solid white;
+				list-style: none;
+			}
+			
+			input[type=button] {
+				width: 50px;
+				height: 25px;
+				font: 15px/25px '微软雅黑';
+				color: white;
+				border: none;
+				background-color: cadetblue;
+			}
+			
+			#fruits a {
+				display: inline-block;
+				width: 15px;
+				height: 15px;
+				background: url(img/ui-icons-trans.png) no-repeat -95px -130px;
+				position: relative;
+				left: 30px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<ul id="fruits">
+			<li>苹果
+				<a href="javascript:void(0)"></a>
+			</li>
+			<li>榴莲
+				<a href="javascript:void(0)"></a>
+			</li>
+			<li>西瓜
+				<a href="javascript:void(0)"></a>
+			</li>
+		</ul>
+		<input type="text " id="fInput" />
+		<input type="button" value="添加" id="addBtn" />
+		<input type="button" value="删除" id="delBtn" />
+
+		<script src="js/ex02.js"></script>
+		<script>
+			//事件回调函数    知道事件发生时会做什么,但不知道事件什么时候发生  
+			// evt 是浏览器回调函数时传入的
+			function rmItem(evt) {
+					var li = evt.target.parentNode; //拿到父节点
+					$('fruits').removeChild(li);
+				}
+			
+			$('addBtn').addEventListener('click', function() {
+				var fName = $('fInput').value.trim();
+				if(fName != '') {
+					var li = document.createElement('li');
+					var a = document.createElement('a');
+					a.href = "javascript:void(0)";
+					a.addEventListener('click', rmItem);
+					li.appendChild(a);
+					$('fruits').appendChild(li);
+					$('fInput').value = '';
+					$('fruits').focus();
+				}
+			});
+			
+			var delBtns = document.querySelectorAll('#fruits a');
+			for (var i = 0; i < delBtns.length; i += 1) {
+				//  绑定事件   用 evt.target 绑定每个事件  i 在 结束后会消失
+				delBtns[i].addEventListener('click',rmItem);
+			}
+			
+			
+			
+			
+//			$('delBtns').addEventListener('click', function() {
+//				var allItems = document.querySelectorAll('#fruits>li');
+//				if(allItems.length > 0) {
+//					$('fruits').removeChild(allItems[allItems.length - 1]);
+//				}
+//			});
+
+//			(function() {
+//				var allItems = document.querySelectorAll('#fruits>li');
+//				for(var i = 0; i < $tag('a').length; i += 1) {
+//					$tag('a')[i].addEventListener('cilck', function foo() {
+//						$('fruits').removeChild(allItems[i])
+//					});
+//
+//				}
+//			}());
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				font-size: 18px;
+			}
+			
+			body {
+				width: 960px;
+				margin: 0 auto;
+			}
+			
+			#login {
+				width: 750px;
+				margin: 20px auto;
+			}
+			
+			#login label {
+				display: inline-block;
+				width: 150px;
+				text-align: right;
+				margin-right: 20px;
+			}
+			
+			.formitem {
+				margin: 20px 0;
+			}
+			
+			.hint {
+				display: inline-block;
+				width: 320px;
+				font-size: 14px;
+				margin-left: 10px;
+			}
+			
+			.correct {
+				color: green;
+			}
+			
+			.incorrect {
+				color: red;
+			}
+			
+			#login input[type="submit"] {
+				display: inline-block;
+				width: 120px;
+				height: 30px;
+				background-color: darkred;
+				color: white;
+				font-size: 20px;
+				line-height: 30px;
+				border: none;
+				cursor: pointer;
+				margin-left: 200px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--action 服务器处理方法    method= get/post-->
+		<form id="login" action="" method="post">
+			<div class="formitem">
+				<label for="username">用户名: </label>
+				<input type="text" id="username" name="username">
+				<span id="uidHint" class="hint"></span>
+				<!-- 错误提示 -->
+			</div>
+			<div class="formitem">
+				<label for="password">密码: </label>
+				<input type="password" id="password" name="password">
+				<span id="pwdHint" class="hint"></span>
+			</div>
+			<div class="formitem">
+				<label for="repassword">确认密码: </label>
+				<input type="password" id="repassword">
+				<span id="rePwdHint" class="hint"></span>
+			</div>
+			<div class="formitem">
+				<label for="tel">手机号: </label>
+				<input type="text" id="tel" name="tel">
+				<span id="telHint" class="hint"></span>
+			</div>
+			<div class="formitem">
+				<label for="code">验证码: </label>
+				<input type="text" id="code" name="code" size="4">
+				<input type="button" value="获取验证码">
+			</div>
+			<div class="formitem">
+				<input type="submit" value="立即开通">
+			</div>
+			<div class="formitem">
+				<label for="agreement"></label>
+				<input type="checkbox" id="agreement">
+				<span>我同意<a href="#">《XYZ服务协议》</a></span>
+			</div>
+		</form>
+		<script src="js/func.js"></script>
+		<script>
+			(function() {
+				bind($('login'), 'submit', function(evt) {
+					evt = evt || window.event;
+					prevDefault(evt) // 阻止事件的默认行为, 这里阻止表单的提交
+			//验证表单
+			//匹配字符串的匹配模式    正则表达式就是定义字符串的匹配模式的工具
+					var telReg = /^1[3456789]\d{9}$/;   // 验证手机号					
+					var uidReg = /^[a-zA-Z_]\w{5,19}$/;  // 验证用户名
+					var qqReg = /^[1-9]\d{4,}$/;            // 验证qq号码
+					var userName = $('username').value.trim();
+					if (!uidReg.test(userName)) {						
+						$('uidHint').textContent = '请输入6-20字符数字下划线组成的用户名,不可字母开头';
+						$('uidHint').className = 'incorrect';
+					}										
+			//验证通过
+					var target = evt.target || evt.srcElement;
+					target.Submit(); //最后手动提交表单 $('login').submit();			
+				})
+			}());
+		</script>
+	</body>
+
+</html>

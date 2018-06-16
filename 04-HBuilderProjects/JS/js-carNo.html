@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>限行</title>
+	</head>
+
+	<body>
+
+		<script type="text/javascript">
+			function lastDigit(carNo) {
+				//循环    for in    for     while  do....while
+				var len = carNo.length; //长度
+				for(var i = len - 1; i >= 0; i -= 1) { // 循环初始条件;控制条件 ; 步进条件 (每循环一次执行都会执行)    条件
+					var ch = carNo.charAt(i);   //取 下标 i 处的值
+					if(ch >= '0' && ch <= '9') {
+						return parseInt(ch); //转换成数字
+					}
+				}
+				return '';
+			}
+			//alert(lastDigit('e4343sd'))
+			//alert(lastDigit('54532d'))
+			//alert(lastDigit('54555'))
+			var carNo = window.prompt('请输入车牌号');
+			var lastNumber = lastDigit(carNo);
+			var data = new Date();
+			var day = data.getDay(); //取星期几
+
+			if (day > 0 && day < 6) {
+				if(day == lastNumber ||
+					day == lastNumber + 5 ||
+					lastNumber % 5 == day) {
+					window.alert('今日限行');
+				}else{
+					alert('今日不限行')
+				}
+			} else {
+				window.alert('非工作日不限行');
+			}
+		</script>
+	</body>
+
+</html>

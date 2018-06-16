@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				width: 960px;
+				margin: 0 auto;
+			}
+			
+			#foo {
+				width: 800px;
+				border: 1px solid red;
+				margin: 0 auto;
+				font: 22px "微软雅黑";
+				overflow: auto; /* css hack 使外框显示出来*/
+			}
+			.poem1,
+			.poem2,
+			.poem3 {
+				width: 200px;
+				float: right;
+				margin: 10px 20px;
+				
+			}
+			/*css hack  黑科技   总结 的难处理的部分  */
+		</style>
+	</head>
+
+	<body>
+		<h3>唐诗鉴赏</h3>
+		<hr>
+		<div id="foo">
+
+			<div class='poem1'>
+				<p>床前明月光</p>
+				<p>疑似地上霜</p>
+				<p>举头望明月</p>
+				<p>低头思故乡</p>
+			</div>
+			<div class='poem2'>
+				<p>鹅鹅鹅</p>
+				<p>曲项向天歌</p>
+				<p>白毛浮绿水</p>
+				<p>红掌拨清波</p>
+			</div>
+			<div class='poem3'>
+				<p>春眠不觉晓</p>
+				<p>处处闻啼鸟</p>
+				<p>夜来风雨声</p>
+				<p>花落知道少</p>
+			</div>
+			
+			<!--css hack-->
+			<!--<div style="clear: both;"></div>-->
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#backGround {
+				width: 960px;
+				height: 700px;
+				margin: 0 auto;
+				background-color: rgb(151, 151, 151);
+			}
+			
+			#logo {
+				position: relative;
+				top: 80px;
+				left: 370px;
+			}
+			#content {
+				position: relative;
+				top: 150px;
+				left: 250px;
+			}
+			ul {
+				border: 1px solid chartreuse;
+				width: 400px;
+				list-style: none;
+			}
+			li {
+				float: left;
+				width: 100px;
+				background-color: wheat;
+				cursor: pointer;
+				margin: 0 10px;
+				text-align: center;
+			}
+			#artical {
+				border: 1px solid blue;
+				width: 400px;
+				height: 200px;
+			}
+			#first, #second, #third {
+				text-align: left;
+				position: relative;
+				top: 10px;
+				display: none;
+			
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id='backGround'>
+			<img id='logo' src="img/logo.png" />
+			<div id="content">
+				<ul>
+					<li id='one'>aaaaa</li>
+					<li id="two">bbbbb</li>
+					<li id ='three'>ccccc</li>
+					<div style="clear: both;"></div>
+				</ul>
+				<div id="artical">
+					<div id="first">11111111112</div>
+					<div id="second">2222222222</div>
+					<div id="third">33333333333</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script >
+			
+		</script>
+		<script>
+			$('one').addEventListener('click', function () {
+				$('first').style.display = 'true';
+			});
+		</script>
+	</body>
+
+</html>

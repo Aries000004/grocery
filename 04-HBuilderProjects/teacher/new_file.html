@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>page</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			body{
+				width: 960px;
+				margin: 0 auto;
+			}
+			h1{
+				text-align: center;
+				line-height: 80px;
+			}
+			#header,#footer{
+				margin: 10px 0;
+				height: 120px;
+				background-color: gainsboro;
+			}
+			#content{
+				margin: 10px 0;
+				height: 500px;
+				/*background-color: #00BFFF;*/
+			}
+			#content1,#content2{
+				height: 280px;
+			}
+			#content1{
+				background: #FFA500;
+				margin-bottom: 10px;
+				
+			}
+			
+			#content2{
+				
+			}
+			
+			.section{
+				width: 300px;
+				height: 200px;
+				margin: 0 10px;
+				float: left;
+				
+				
+			}
+			
+			.section1{
+				background: black;
+			}
+			.section2{
+				background: whitesmoke;
+			}
+			.section3{
+				background: chartreuse;
+			}
+			#nav{
+				height: 40px;
+				width: 720px;
+				margin: 0 auto;
+			}
+			
+			#nav li{
+			
+				width: 120px;
+				display: inline-block;
+				list-style: none;
+				margin: 10px 10px;
+				text-align: center;
+				
+			}
+			#nav a{
+				text-decoration: none;
+			}
+			/*#header{
+				margin: 10px auto;
+				width: 80%;
+				height: 100px;
+				background-color: gainsboro;
+			}
+			#title{
+				margin: 10px auto;
+				width: 80%;
+				height: 250px;
+				background-color: deepskyblue;
+			}
+			#content{
+				margin: 10px auto;
+				width: 80%;
+				height: 200px;
+			}
+			
+			#foot{
+				margin: 10px auto;
+				width: 80%;
+				height: 60px;
+				background-color: gainsboro;
+			}
+			.rect1,
+			.rect2,
+			.rect3{
+				width: 30%;
+				height: 180px;
+				margin: 10px auto;
+				float: left;
+				margin: 10px 10px;
+			}
+			.rect1{
+				background: lightcoral;
+			}
+			.rect2{
+				background: olivedrab;
+				
+			}
+			.rect3{
+				background: wheat;
+			}*/
+		</style>
+	</head>
+	
+	
+	<body>
+		
+		<div id="header">
+			<h1>Logo</h1>
+			<ul id="nav">
+					<li><a href="">Home</a></li>
+					<li><a href="">Products</a></li>
+					<li><a href="">Services</a></li>
+					<li><a href="">About</a></li>
+					<li><a href="">Contact</a></li>
+				</ul>
+		</div>
+		<div id="content">
+			<div id="content1"></div>
+			<div id="content2">
+				<div class="section section1"></div>
+				<div class="section section2"></div>
+				<div class="section section3"></div>
+			</div>
+		</div>
+			
+		<div id="footer">
+			<h2>&copy;Copyright 2011</h2>
+		</div>
+		
+	</body>
+</html>

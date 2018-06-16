@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>车辆违章</title>
+</head>
+<body>
+    <div>
+        <form id="search" action="/search2" method="post">
+        {% csrf_token %}   {# 防止跨站身份伪造最佳做法放置随机令牌#}
+        <input type="search" id="carno" name="carno" placeholder="请输入车牌号码" required>
+        <input type="submit" value="搜索">
+        </form>
+        <hr>
+    {% if show_result %}
+         <table id="result" class="table table-hover table-bordered">
+             <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>车牌号码</th>
+                            <th>违章原因</th>
+                            <th>违章日期</th>
+                            <th>处罚方式</th>
+                            <th>是否受理</th>
+                        </tr>
+             </thead>
+             <tbody>
+                        {% for record in record_list %}
+
+                        {% endfor %}
+             </tbody>
+         </table>
+    {% endif %}
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('#search').on('submit', function (evt)  {
+                evt.preventDefault(); //阻止默认的提交行为
+                var carno = $('#carno').val();
+                var token = $('#search input[type=hidden]').val();
+                $.ajax({
+                    url: '/search2',
+                    type: 'post',
+                    data: {
+                        'carno': carno,
+                        'csrfmiddlewaretoken': token
+                    },
+                    dataType: 'json',
+                    success: function(json) {
+                        $('#result tbody').children().remove();
+                        alert(json.length);
+                        for (var i = 0; i < json.length; i += 1) {
+                            var tr = $('<tr>').append($('<td>')).txt(json);
+                            $('#result tbody').append(tr);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

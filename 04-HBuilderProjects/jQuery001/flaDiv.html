@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<style>
+			#container {
+				width: 802px;
+				height: 402px;
+				border: 1px solid black;
+				margin: 0 auto;
+			}
+			
+			#pannel {
+				width: 802px;
+				margin: 0 auto;
+			}
+			
+			.piece {
+				width: 80px;
+				height: 80px;
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="container">
+		</div>
+		<div id="pannel">
+			<button id="addBtn">添加</button>
+			<button id="flaBtn">闪烁</button>
+		</div>
+
+		<script src="js/jquery1.12.min.js"></script>
+
+		<script>
+			$(function () {
+				function randomColor() {
+				var r = parseInt(Math.random() * 256);
+				var g = parseInt(Math.random() * 256);
+				var b = parseInt(Math.random() * 256);
+				return 'rgb(' + r + ',' + g + ',' + b + ')';
+			}
+				$('#addBtn').on('click', function () {
+					$('#container').append($("<div>").attr("class", 'piece').css('background-color', randomColor()))
+					//var div = $('<div>').attr('class', 'piece').css('background-color', randomColor());
+					//$('#container').append(div);
+				});
+				// 只执行一次
+				$('#flaBtn').one('click', function () {
+					window.setInterval(function() {
+						//对每一个元素操作
+						$("#container div").each(function () {
+							$(this).css('background-color', randomColor())
+						});
+					}, 1000);
+				});
+				
+				
+			});
+
+		</script>
+	</body>
+
+</html>

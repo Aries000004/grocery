@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#adv {
+				display: inline-block;
+			}
+			
+			#one,
+			#two,
+			#three,
+			#four,
+			#five,
+			#six {
+				position: fixed;
+				top: 0;
+				left: 100px;
+				width: 600px;
+				height: 100px;
+			}
+			
+			
+		</style>
+
+	</head>
+
+	<body>
+		<div id="adv">
+			<div id="one"><img src="img/1.jpg" style="width: 600px; height: 100px;" /></div>
+			<div id="two"><img src="img/2.jpg" style="width: 600px; height: 100px;" /></div>
+			<div id="three"><img src="img/3.jpg" style="width: 600px; height: 100px;" /></div>
+			<div id="four"><img src="img/4.jpg" style="width: 600px; height: 100px;" /></div>
+			<div id="five"><img src="img/5.jpg" style="width: 600px; height: 100px;" /></div>
+			<div id="six"><img src="img/1.jpg" style="width: 600px; height: 100px;" /></div>
+
+		</div>
+
+		<script src="js/jquery1.12.min.js"></script>
+		<script>
+			$(function() {
+				//var images = ["img/1.jpg", "img/2.jpg", "img/3.jpg", "img/4.jpg", "img/5.jpg", ];
+				var counter = 0;
+				var elems = ['#one', '#two', '#three', '#four', '#five', '#six']
+				//function change
+				window.setInterval(function() {
+					var a = elems[counter]
+					$(a).fadeIn(200);
+					if (counter != 0) {
+						$(elems[counter - 1]).css('visibility' ,'hidden');
+					}					
+					counter += 1;
+					if(counter == 6) {
+						counter = 0;
+					}
+				}, 1000);
+			});
+		</script>
+	</body>
+
+</html>

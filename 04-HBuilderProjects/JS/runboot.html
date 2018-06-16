@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<p> nihao!&&\u253a</p>
+		<h2>你好</h2>
+		<p id="time">当前时间:</p>
+		<button onclick="showTime()">显示时间</button>
+		
+		<p>
+		<script>
+			function showTime(){
+			var date = new Date() ; //创建对象
+			var p = document.getElementById('time');
+			p.textContent = '当前时间:' + date;
+			}
+			var a = 20;
+			var b = 20.344;
+			var c = 'h';
+			var d = 'hello';
+			
+			console.log(typeof(a));
+		</script>
+		</p>
+		
+	</body>
+
+</html>
