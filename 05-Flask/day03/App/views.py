@@ -110,7 +110,6 @@ def update_stu():
         return redirect(url_for('user.stu_list'))
 
 
-
 @user_blueprint.route('/stu_list/')
 def stu_list():
     """
