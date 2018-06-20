@@ -112,7 +112,7 @@ def user_info():
         data = {
             'name': user.name,
             'phone': user.phone,
-            'avatar': user.avatar.replace('\\', '/') if user.avatar else '',
+            'img_url': '/static/' + user.avatar if user.avatar else '',
         }
         return jsonify({'code': status_code.OK, 'data': data})
     else:
@@ -146,7 +146,7 @@ def user_profile():
         except Exception as e: # 数据库错误
             return jsonify(status_code.DATABASE_ERROR)
         # 上传成功, 将头像信息传回 渲染页面
-        return jsonify(code=status_code.OK, img_url=avatar_path)
+        return jsonify(code=status_code.OK, img_url='/static/' + avatar_path)
     # 更改姓名
     if name:
         user = User.query.filter(User.name==name).first()
@@ -162,3 +162,49 @@ def user_profile():
                 db.session.rollback()
                 return jsonify(status_code.DATABASE_ERROR)
             return jsonify(status_code.USER_INFO_NAME_CHANGE_SUCCESS)
+
+
+@user_blueprint.route('/auth/', methods=['GET'])
+def auth():
+    """实名认证  GET"""
+    return render_template('auth.html')
+
+
+@user_blueprint.route('/auth/', methods=['PATCH'])
+def user_auth():
+    """实名认证  PATCH"""
+    real_name = request.form.get('real_name')
+    id_card = request.form.get('id_card')
+
+    if not all([real_name, id_card]):
+        return jsonify(status_code.USER_AUTH_INFO_NOT_INTACT) # 信息不能为空
+
+    if not re.match(r'^[1-9]\d{17}', id_card):
+        return jsonify(status_code.USER_AUTH_ID_NOT_AVALID)
+
+    user = User.query.get(session['user_id'])
+    if user:
+        user.id_name = real_name
+        user.id_card = id_card
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return jsonify(status_code.DATABASE_ERROR)
+        return jsonify(status_code.SUCCESS)
+
+
+@user_blueprint.route('/auths/', methods=['GET'])
+def user_auths():
+    """实名认证信息渲染页面"""
+    user = User.query.get(session['user_id'])
+    if user:
+        real_name = user.id_name
+        id_card = user.id_card
+
+        return jsonify(code=status_code.OK, data=user.to_auth_dict())
+
+
+
+

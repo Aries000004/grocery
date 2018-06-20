@@ -76,8 +76,9 @@ def user_market(request, typeid, cid, sid):
             goods = goods.order_by('price')
 
         # 返回购物车信息
-
-        cart = CartModel.objects.filter(user=request.user)
+        cart = []
+        if request.user.id:
+            cart = CartModel.objects.filter(user=request.user)
 
         data = {
             'foodtypes': foodtypes,
@@ -163,15 +164,18 @@ def cart(request):
 
     if request.method == 'GET':
         user = request.user
+        if user.id:
 
-        user_carts = CartModel.objects.filter(user=user)
+            user_carts = CartModel.objects.filter(user=user)
 
-        data = {
-            'user_carts': user_carts,
+            data = {
+                'user_carts': user_carts,
 
-        }
+            }
 
-        return render(request, 'cart/cart.html', data)
+            return render(request, 'cart/cart.html', data)
+        else:
+            return render(request, 'cart/cart.html')
 
 
 def change_select(request):

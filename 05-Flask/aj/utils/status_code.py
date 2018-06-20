@@ -2,6 +2,7 @@
 """ 状态码 """
 
 OK = 200  # 请求成功
+SUCCESS = {'code': OK, 'msg': '请求成功'}
 
 # 用户模块
 USER_INFO_NOT_INTACT = {'code': 1004, 'msg': '用户信息不完整'}
@@ -22,5 +23,15 @@ DATABASE_ERROR = {'code': 1008, 'msg': '数据库错误, 请稍后再试'}
 USER_NAME_ALERDY_EXISTS = {'code': 1009, 'msg': '用户名已存在'}
 USER_INFO_NAME_CHANGE_SUCCESS = {'code': OK, 'msg': '用户名更换成功'}
 USER_NOT_LOGIN = {'code': 1011, 'msg': '用户未登录'}
+
+
+# 实名认证
+USER_AUTH_INFO_NOT_INTACT = {'code': 1012, 'msg': '用户认证信息不完整'}
+USER_AUTH_ID_NOT_AVALID = {'code': 1013, 'msg': '省份证号码不正确'}
+
+# 房屋 house
+
+
+
 
 

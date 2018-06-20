@@ -14,10 +14,13 @@ function getCookie(name) {
 $(document).ready(function () {
     changeName();
     avatarSubmit();
+    UserInfo();
 
     $('#user-name').focus(function () {
+        $('#user-name').val('');
         $('.error-msg').hide();
     });
+
 
 });
 
@@ -29,10 +32,8 @@ function avatarSubmit() {
             type: 'PATCH',
             dataType: 'json',
             success: function (data) {
-                console.log(data);
-                var avatar_path = '/static/'+data.img_url;
-                console.log(avatar_path);
-                $('#user-avatar').attr('src', avatar_path);
+                // console.log(data);
+                $('#user-avatar').attr('src', data.img_url);
             },
             error: function () {
 
@@ -63,5 +64,24 @@ function changeName() {
             }
         });
         return false;
+    });
+};
+
+
+
+function UserInfo() {
+     $.ajax({
+        url: '/user/user_info/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            $('#user-name').val(data.data.name);
+            $('#user-avatar').attr('src', data.data.img_url);
+            // alert(avatar_path)
+        },
+        error: function (msg) {
+            alert('请求失败')
+        },
     });
 };

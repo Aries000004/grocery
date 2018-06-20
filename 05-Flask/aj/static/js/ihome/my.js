@@ -7,7 +7,7 @@ function logout() {
 }
 
 $(document).ready(function(){
-    UserInfo()
+    UserInfo();
 });
 
 // 获取用户信息功能函数
@@ -17,11 +17,10 @@ function UserInfo() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            console.log(data);
-            $('#user-name').html(data.name);
-            $('#user-mobile').html(data.phone);
-            var avatar_path = '/static/'+data.avatar;
-            $('#user-avatar').attr('src', avatar_path);
+            // console.log(data);
+            $('#user-name').html(data.data.name);
+            $('#user-mobile').html(data.data.phone);
+            $('#user-avatar').attr('src', data.data.img_url);
             // alert(avatar_path)
         },
         error: function (msg) {

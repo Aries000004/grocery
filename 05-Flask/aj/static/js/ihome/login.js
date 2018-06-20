@@ -16,7 +16,7 @@ $(document).ready(function() {
             dataType: 'json',
             data: {'mobile': mobile, 'password': passwd},
             success: function (data) {
-                alert(data);
+                // alert(data);
                 console.log(data);
                 location.href='/user/my/'
             },

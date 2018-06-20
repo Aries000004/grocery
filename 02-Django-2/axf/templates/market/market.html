@@ -77,7 +77,7 @@
                         <button goodsid="" onclick="sub_cart({{ gds.id }})" >-</button>
 
                         <span id="num_{{ gds.id }}">
-                            {% if gds.cartmodel_set.all %}  <!--判断商品是否在购物车-->
+                            {% if gds.cartmodel_set.all and user.id %}  <!--判断商品是否在购物车-->
                                 <!--拿取所有的商品,  会有多个用户持有该商品-->
                                 {% for cart_goods in gds.cartmodel_set.all %}
                                     <!-- 一个商品可能在多个人的购物车中, 判断在当前用户的购物车中, 拿取该用户商品数量-->
