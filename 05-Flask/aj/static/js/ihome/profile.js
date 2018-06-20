@@ -12,30 +12,39 @@ function getCookie(name) {
 }
 
 $(document).ready(function () {
+    changeName();
+    avatarSubmit();
+
+    $('#user-name').focus(function () {
+        $('.error-msg').hide();
+    });
+
+});
+
+// 提交头像
+function avatarSubmit() {
     $('#form-avatar').submit(function () {
-
-        var avatar = $('#avatar').val();
-        var name = $('.user-name').val();
-        // alert(avatar);
-        // alert(typeof(avatar));
-
-        $.ajax({
+        $(this).ajaxSubmit({
             url: '/user/profile/',
             type: 'PATCH',
             dataType: 'json',
-            data: {'avatar': avatar},
             success: function (data) {
-                console.log(data)
+                console.log(data);
+                var avatar_path = '/static/'+data.img_url;
+                console.log(avatar_path);
+                $('#user-avatar').attr('src', avatar_path);
             },
             error: function () {
-                alert('请求失败')
-            }
+
+            },
         });
-
+        return false;
     });
-    // 更换用户名
-    $('#form-name').submit(function () {
+};
 
+// 更换用户名
+function changeName() {
+    $('#form-name').submit(function () {
         var name = $('#user-name').val();
         // alert(name)
         $.ajax({
@@ -45,11 +54,14 @@ $(document).ready(function () {
             data: {'name': name},
             success: function (data) {
                 console.log(data);
+                if (data.code == 1009) {
+                    $('.error-msg').show();
+                };
             },
             error: function () {
                 alert('请求失败')
             }
         });
-
+        return false;
     });
-});
+};

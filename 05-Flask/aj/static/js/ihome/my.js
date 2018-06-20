@@ -22,7 +22,7 @@ function UserInfo() {
             $('#user-mobile').html(data.phone);
             var avatar_path = '/static/'+data.avatar;
             $('#user-avatar').attr('src', avatar_path);
-            alert(avatar_path)
+            // alert(avatar_path)
         },
         error: function (msg) {
             alert('请求失败')
