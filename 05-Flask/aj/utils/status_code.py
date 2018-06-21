@@ -27,11 +27,14 @@ USER_NOT_LOGIN = {'code': 1011, 'msg': '用户未登录'}
 
 # 实名认证
 USER_AUTH_INFO_NOT_INTACT = {'code': 1012, 'msg': '用户认证信息不完整'}
-USER_AUTH_ID_NOT_AVALID = {'code': 1013, 'msg': '省份证号码不正确'}
+USER_AUTH_ID_NOT_AVALID = {'code': 1013, 'msg': '身份证号码不正确'}
 
 # 房屋 house
 
 
+
+# order
+ORDER_DAYS_ERROR = {'code': 1100, 'msg': '订单的结束时间不能小于开始时间'}
 
 
 

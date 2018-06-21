@@ -6,6 +6,7 @@ from flask import Flask
 from aj_app.views import aj_blueprint
 from aj_app.user_views import user_blueprint
 from aj_app.house_views import house_blueprint
+from aj_app.order_view import order_blueprint
 from utils.ext_init_app import ext_init
 from utils.settings import STATIC_DIR, TEMPLATES_DIR
 
@@ -21,6 +22,8 @@ def create_app():
                            url_prefix='/user')
     app.register_blueprint(blueprint=house_blueprint,
                            url_prefix='/house')
+    app.register_blueprint(blueprint=order_blueprint,
+                           url_prefix='/order')
 
     app.config['SQLALCHEMY_DATABASE_URI'] = \
         'mysql+pymysql://root:123456@localhost:3306/aj'

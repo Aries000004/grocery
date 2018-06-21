@@ -16,7 +16,7 @@
         <div class="top-bar">
             <div class="nav-bar">
                 <h3 class="page-title">我的房源</h3>
-                <a class="nav-btn fl" href="/my.html"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
+                <a class="nav-btn fl" href="{{ url_for('user.my') }}"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
             </div>
         </div>
         <div class="houses-con">
@@ -36,8 +36,7 @@
                         <a href="{{ url_for('house.new_house') }}">发布新房源</a>
                     </div>
                 </li>
-                <li>
-
+                {#<li>
                     <a href="">
                         <div class="house-title">
                             <h3>房屋ID:1 —— 房屋标题1</h3>
@@ -50,10 +49,10 @@
                                     <li>价格：￥200/晚</li>
                                     <li>发布时间：2016-11-11 20:00:00</li>
                                 </ul>
-                            </div> 
+                            </div>
                         </div>
                     </a>
-                </li>
+                </li>#}
 
             </ul>
         </div>

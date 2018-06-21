@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block etxJS %}
-    {{ super() }}    <script src="/static/js/ihome/detail.js"></script>
+    {{ super() }}
+<script src="/static/js/ihome/detail.js"></script>
 
 {% endblock %}
 {% block content %}
@@ -21,6 +22,7 @@
             </div>
         </div>
         <div class="swiper-container">
+            <!--轮播图-->
             <ul class="swiper-wrapper">
                 <li class="swiper-slide"><img src="/static/images/home01.jpg"></li>
                 <li class="swiper-slide"><img src="/static/images/home02.jpg"></li>
@@ -45,31 +47,31 @@
                 <li>
                     <span class="icon-house"></span>
                     <div class="icon-text">
-                        <h3>出租6间</h3>
-                        <p>房屋面积:200平米</p> 
-                        <p>房屋户型:三室两厅两卫</p>
+                        <h3 >出租 <span class="count_house">6</span>间 </h3>
+                        <p>房屋面积:<span class="area-house">200</span>平米</p>
+                        <p>房屋户型:<span class="type_house">三室两厅两卫</span></p>
                     </div>
                 </li>
                 <li>
                     <span class="icon-user"></span>
                     <div class="icon-text">
-                        <h3>宜住10人</h3>
+                        <h3>宜住 <span class="peoples"></span> 人</h3>
                     </div>
                 </li>
                 <li>
                     <span class="icon-bed"></span>
                     <div class="icon-text">
                         <h3>卧床配置</h3>
-                        <p>双人床两张</p>
+                        <p class="beds">双人床两张</p>
                     </div>
                 </li>
             </ul> 
             <div class="house-info layout-style">
                 <h3>房间详情</h3>
                 <ul class="house-info-list">
-                    <li>收取押金<span>2000</span></li>
-                    <li>最少入住天数<span>1</span></li>
-                    <li>最多入住天数<span>无限制</span></li>
+                    <li>收取押金<span class="aaa1">2000</span></li>
+                    <li>最少入住天数<span class="aaa2">1</span></li>
+                    <li>最多入住天数<span class="aaa3">无限制</span></li>
                 </ul>
             </div>
             <div class="house-facility layout-style">

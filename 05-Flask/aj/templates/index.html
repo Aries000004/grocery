@@ -16,23 +16,30 @@
         <div class="top-bar">
             <img class="logo fl" src="/static/images/logo@128x59.png">
             <div class="register-login fr">
-                <a class="btn top-btn btn-theme" href="/register.html">注册</a>
-                <a class="btn top-btn btn-theme" href="/login.html">登录</a>
+                {% if not session.user_id %}
+                <a class="btn top-btn btn-theme" href="{{ url_for('user.register') }}">注册</a>
+                <a class="btn top-btn btn-theme" href="{{ url_for('user.login') }}">登录</a>
+                {% else %}
+                <a class="btn top-btn btn-theme" href="{{ url_for('user.my') }}">个人</a>
+                {% endif %}
             </div>
-            <div class="user-info fr"><span><i class="fa fa-user fa-lg"></i></span> <a class="user-name" href="/my.html"></a></div>
+            <div class="user-info fr">
+                <span><i class="fa fa-user fa-lg"></i></span>
+                <a class="user-name" href="{{ url_for('user.my') }}">个人</a>
+            </div>
         </div>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <a href="/detail.html?id=1"><img src="/static/images/home01.jpg"></a>
+                    <a href="/"><img src="/static/images/home01.jpg"></a>
                     <div class="slide-title">房屋标题1</div>
                 </div>
                 <div class="swiper-slide">
-                    <a href="/detail.html?id=2"><img src="/static/images/home02.jpg"></a>
+                    <a href="/"><img src="/static/images/home02.jpg"></a>
                     <div class="slide-title">房屋标题2</div>
                 </div>
                 <div class="swiper-slide">
-                    <a href="/detail.html?id=3"><img src="/static/images/home03.jpg"></a>
+                    <a href="/"><img src="/static/images/home03.jpg"></a>
                     <div class="slide-title">房屋标题3</div>
                 </div>
             </div>

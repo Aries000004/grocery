@@ -24,7 +24,7 @@ class BaseModel(object):
 
 class User(BaseModel, db.Model):
     """用户模型"""
-    __tablename__ = 'tb_user'
+    __tablename__ = 'ihome_user'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     phone = db.Column(db.String(11), unique=True)
     pwd_hash = db.Column(db.String(200))
@@ -32,6 +32,9 @@ class User(BaseModel, db.Model):
     avatar = db.Column(db.String(30)) # 头像
     id_name = db.Column(db.String(30))  #  身份证姓名
     id_card = db.Column(db.String(18))  # 身份证号码
+
+    houses = db.relationship('House', backref='user')
+    orders = db.relationship('Order', backref='user')
 
     @property
     def password(self):
@@ -77,7 +80,6 @@ class Area(BaseModel, db.Model):
             'id':self.id,
             'name':self.name
         }
-
 
 
 class Facility(BaseModel, db.Model):
