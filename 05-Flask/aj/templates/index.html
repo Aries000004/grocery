@@ -9,23 +9,20 @@
 {% endblock %}
 
 {% block etxJS %}
-    {{ super() }}   <script src="/static/js/ihome/index.js"></script>
+    {{ super() }}
+<script src="/static/js/ihome/index.js"></script>
 {% endblock %}
 {% block content %}
     <div class="container">
         <div class="top-bar">
             <img class="logo fl" src="/static/images/logo@128x59.png">
             <div class="register-login fr">
-                {% if not session.user_id %}
                 <a class="btn top-btn btn-theme" href="{{ url_for('user.register') }}">注册</a>
                 <a class="btn top-btn btn-theme" href="{{ url_for('user.login') }}">登录</a>
-                {% else %}
-                <a class="btn top-btn btn-theme" href="{{ url_for('user.my') }}">个人</a>
-                {% endif %}
             </div>
             <div class="user-info fr">
                 <span><i class="fa fa-user fa-lg"></i></span>
-                <a class="user-name" href="{{ url_for('user.my') }}">个人</a>
+                <a class="user-name" href="{{ url_for('user.my') }}">用户</a>
             </div>
         </div>
         <div class="swiper-container">

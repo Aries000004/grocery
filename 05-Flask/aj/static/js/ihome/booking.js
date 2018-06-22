@@ -71,7 +71,7 @@ function submit_form() {
     $.post('/order/create_order/', data, function (msg){
         console.log(msg);
         if (msg.code == 200) {
-            location.href = '/user/my/'
+            location.href = '/order/orders/'
         }
     });
 };

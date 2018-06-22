@@ -1,3 +1,7 @@
+function hrefBack() {
+    history.go(-1);
+}
+
 //模态框居中的控制
 function centerModals(){
     $('.modal').each(function(i){   //遍历每一个模态框
@@ -22,3 +26,16 @@ $(document).ready(function(){
         $(".modal-comment").attr("order-id", orderId);
     });
 });
+
+$.get('/order/user_orders/', function (msg) {
+    console.log(msg);
+    if (msg.code.code == 200) {
+        //  script  id 值 !!
+        var order_html = template('orders-list-tmpl', {orders: msg.order_info});
+        $('.orders-list').html(order_html);
+    }
+
+});
+
+
+

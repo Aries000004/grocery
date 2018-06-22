@@ -84,4 +84,18 @@ $(document).ready(function(){
         var date = $(this).datepicker("getFormattedDate");
         $("#start-date-input").val(date);
     });
-})
+});
+
+
+$.get('/house/hindex/', function(msg) {
+    console.log(msg);
+    if (msg.code == 200) {
+        if (msg.username) {
+            $('.register-login').hide();
+            $('.user-info').show().val(msg.username);
+        } else return;
+
+
+
+    } else return;
+});

@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, url_for, \
     request, session, jsonify
 
 from aj_app.models import Area, House, HouseImage, \
-    Facility, Order, db
+    Facility, db, User
 from utils import status_code
 from utils.decorator import login_required
 
@@ -27,6 +27,20 @@ house_blueprint = Blueprint('house', __name__)
 def index():
 
     return render_template('index.html')
+
+
+@house_blueprint.route('/hindex/', methods=['GET'])
+def hindex():
+    username = ''
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        username = user.name
+
+    houses = House.query.order_by(House.id.desc()).all()[:5]
+    house_info = [house.to_dict() for house in houses]
+
+    return jsonify(status_code.OK, username=username,
+                   house_info=house_info)
 
 
 @house_blueprint.route('/myhouse/', methods=['GET'])

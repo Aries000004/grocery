@@ -18,12 +18,14 @@
         <div class="top-bar">
             <div class="nav-bar">
                 <h3 class="page-title">我的订单</h3>
-                <a class="nav-btn fl" href="/my.html"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
+                <a class="nav-btn fl" href="{{ url_for('user.my') }}"><span><i class="fa fa-angle-left fa-2x"></i></span></a>
             </div>
         </div>
         <div class="orders-con">
             <ul class="orders-list">
             </ul>
+            <!--隔离开  jinjia2  和 templates.js-->
+            {% raw %}
             <script id="orders-list-tmpl" type="text/html">
                 {{if orders}}
                 {{each orders as order}}
@@ -39,29 +41,29 @@
                     <div class="order-content">
                         <img src="{{order.img_url}}">
                         <div class="order-text">
-                            <h3>{{order.title}}</h3>
+                            <h3>{{order.house_title}}</h3>
                             <ul>
-                                <li>创建时间：{{order.ctime}}</li>
-                                <li>入住日期：{{order.start_date}}</li>
+                                <li>创建时间：{{order.create_date}}</li>
+                                <li>入住日期：{{order.begin_date}}</li>
                                 <li>离开日期：{{order.end_date}}</li>
-                                <li>合计金额：￥{{(order.amount/100.0).toFixed(0)}}(共{{order.days}}晚)</li>
+                                <li>合计金额：￥{{(order.amount)}}</li>
                                 <li>订单状态：
                                     <span>
-                                        {{if 0 == order.status}}
+                                        {{if "WAIT_ACCEPT" == order.status}}
                                             待接单
-                                        {{else if 3 == order.status}}
+                                        {{else if "WAIT_COMMENT" == order.status}}
                                             待评价
-                                        {{else if 4 == order.status}}
+                                        {{else if "COMPLETE" == order.status}}
                                             已完成
-                                        {{else if 6 == order.status}}
+                                        {{else if "REJECTED" == order.status}}
                                             已拒单
                                         {{/if}}
                                     </span>
                                 </li>
-                                {{if 4 == order.status}}
+                                {{if "PAID" == order.status}}
                                 <li>我的评价： {{order.comment}}</li>
-                                {{else if 6 == order.status}}
-                                <li>拒单原因： {{order.comment}}</li>
+                                {{else if "CANCELED" == order.status}}
+                                <li>取消原因： {{order.comment}}</li>
                                 {{/if}}
                             </ul>
                         </div>
@@ -72,6 +74,8 @@
                 暂时没有订单。
                 {{/if}}
             </script>
+            {% endraw %}
+
             <div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="comment-label">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
