@@ -1,3 +1,4 @@
+
 //模态框居中的控制
 function centerModals(){
     $('.modal').each(function(i){   //遍历每一个模态框
@@ -27,7 +28,7 @@ $(document).ready(function(){
     //     $(".modal-reject").attr("order-id", orderId);
     // });
 });
-function orderInfo(){
+function orderInfo () {
     $.get('/order/user_lorders/', function (msg) {
         console.log(msg);
         if (msg.code == 200) {

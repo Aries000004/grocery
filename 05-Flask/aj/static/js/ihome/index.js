@@ -44,7 +44,7 @@ function setEndDate() {
 }
 
 function goToSearchPage(th) {
-    var url = "/search.html?";
+    var url = "/house/search/?";
     url += ("aid=" + $(th).attr("area-id"));
     url += "&";
     var areaName = $(th).attr("area-name");
@@ -86,16 +86,47 @@ $(document).ready(function(){
     });
 });
 
-
+// 刷新首页用户信息
 $.get('/house/hindex/', function(msg) {
     console.log(msg);
     if (msg.code == 200) {
         if (msg.username) {
             $('.register-login').hide();
-            $('.user-info').show().val(msg.username);
+            $('.user-info').show();
+            $('.user-name').html(msg.username);
+
+            // 刷新首页轮播图
+            var house_wrapper = template('house-warper-tmpl', {houses: msg.house_info});
+            console.log(house_wrapper);
+            $('.swiper-wrapper').append(house_wrapper);
+            var mySwiper = new Swiper ('.swiper-container', {
+                loop: true,
+                autoplay: 2000,
+                autoplayDisableOnInteraction: false,
+                pagination: '.swiper-pagination',
+                paginationClickable: true
+            });
+
         } else return;
 
-
-
     } else return;
+});
+
+// 获取地区信息
+$.get('/house/area_facility/', function (msg) {
+    console.log(msg);
+    if (msg.code == 200) {
+        var areas = msg.data.areas;
+        var area_html = template('area-list', {areas: areas});
+        $('.area-list').append(area_html);
+
+        $(".area-list a").click(function(e){
+            $("#area-btn").html($(this).html());
+            $(".search-btn").attr("area-id", $(this).attr("area-id"));
+            $(".search-btn").attr("area-name", $(this).html());
+            $("#area-modal").modal("hide");
+        });
+
+    };
+
 });

@@ -27,21 +27,24 @@
         </div>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <a href="/"><img src="/static/images/home01.jpg"></a>
-                    <div class="slide-title">房屋标题1</div>
-                </div>
-                <div class="swiper-slide">
-                    <a href="/"><img src="/static/images/home02.jpg"></a>
-                    <div class="slide-title">房屋标题2</div>
-                </div>
-                <div class="swiper-slide">
-                    <a href="/"><img src="/static/images/home03.jpg"></a>
-                    <div class="slide-title">房屋标题3</div>
-                </div>
+
             </div>
             <div class="swiper-pagination"></div>
         </div>
+
+        {% raw %}
+            <script type="text/html" id="house-warper-tmpl">
+                {{ each houses as house }}
+                    <div class="swiper-slide">
+                        <a href="/house/detail/{{ house.id }}/">
+                            <img src="/static/{{ house.image }}"></a>
+                        <div class="slide-title">{{ house.title }}</div>
+                    </div>
+                {{ /each }}
+            </script>
+        {% endraw %}
+
+
         <div class="search-bar">
             <button class="filter-btn" type="button" data-toggle="modal" data-target="#area-modal"><span class="fl" id="area-btn">选择城区</span><span class="fr"><i class="fa fa-map-marker fa-lg fa-fw"></i></span></button>
             <button class="filter-btn" type="button" data-toggle="modal" data-target="#start-date-modal"><span class="fl" id="start-date-btn">入住日期</span><span class="fr"><i class="fa fa-calendar fa-lg fa-fw"></i></span></button>
@@ -56,23 +59,18 @@
                         </div>
                         <div class="modal-body">
                             <div class="area-list">
-                                <a href="#" area-id="1">东城区</a>
-                                <a href="#" area-id="2">西城区</a>
-                                <a href="#" area-id="3">朝阳区</a>
-                                <a href="#" area-id="4">海淀区</a>
-                                <a href="#" area-id="5">昌平区</a>
-                                <a href="#" area-id="6">丰台区</a>
-                                <a href="#" area-id="7">房山区</a>
-                                <a href="#" area-id="8">通州区</a>
-                                <a href="#" area-id="9">顺义区</a>
-                                <a href="#" area-id="10">大兴区</a>
-                                <a href="#" area-id="11">怀柔区</a>
-                                <a href="#" area-id="12">平谷区</a>
-                                <a href="#" area-id="13">密云区</a>
-                                <a href="#" area-id="14">延庆区</a>
-                                <a href="#" area-id="15">石景山区</a>
-                                <a href="#" area-id="16">门头沟区</a>
+
                             </div>
+
+                            {% raw %}
+                            <script type="text/html" id="area-list">
+                                {{ each areas as area }}
+                                <a href="#" area-id="{{ area.id }}">{{ area.name }}</a>
+                                {{ /each }}
+
+                            </script>
+                            {% endraw %}
+
                         </div>
                     </div>
                 </div>

@@ -1,16 +1,19 @@
 import os
+from datetime import datetime
 
 from flask import Blueprint, render_template, url_for, \
     request, session, jsonify
 
 from aj_app.models import Area, House, HouseImage, \
-    Facility, db, User
+    Facility, db, User, Order
 from utils import status_code
 from utils.decorator import login_required
 
 
 house_blueprint = Blueprint('house', __name__)
 
+
+# 建表
 # @house_blueprint.route('/drop_all/')
 # def drop():
 #     db.drop_all()
@@ -25,12 +28,13 @@ house_blueprint = Blueprint('house', __name__)
 
 @house_blueprint.route('/', methods=['GET'])
 def index():
-
+    """首页"""
     return render_template('index.html')
 
 
 @house_blueprint.route('/hindex/', methods=['GET'])
 def hindex():
+    """首页刷新信息"""
     username = ''
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
@@ -39,8 +43,42 @@ def hindex():
     houses = House.query.order_by(House.id.desc()).all()[:5]
     house_info = [house.to_dict() for house in houses]
 
-    return jsonify(status_code.OK, username=username,
+    return jsonify(code=status_code.OK, username=username,
                    house_info=house_info)
+
+
+@house_blueprint.route('/search/', methods=['GET'])
+def search():
+    """查找功能"""
+    return render_template('search.html')
+
+
+@house_blueprint.route('/house_search/', methods=['GET'])
+def house_search():
+    """首页 搜索功能"""
+    search_dict = request.args
+    aid = search_dict.get('aid')  # 区域的 ID
+    sd = datetime.strptime(search_dict.get('sd'), '%Y-%m-%d')  # 开始时间
+    ed = datetime.strptime(search_dict.get('ed'), '%Y-%m-%d')  # 结束时间
+    # 通过区域老搜索房屋
+    houses = House.query.filter(House.area_id == aid)
+    # 房东不能查找到自己发布的房屋
+    if 'user_id' in session:
+        houses = houses.filter(House.user_id != session['user_id'])
+    # 判断搜索的开始 结束 时间 和房屋订单的 开始时间 和 结束时间
+    # 搜索时间的开始大于 订单时间的 结束   搜索时间的结束小于订单开始
+    condition1 = Order.query.filter(Order.begin_date <= ed, Order.begin_date >= sd)
+    condition2 = Order.query.filter(Order.begin_date <= sd, Order.end_date >= ed)
+    condition3 = Order.query.filter(Order.end_date >= sd, Order.end_date <= ed)
+    ignore_houses = condition1.all() + condition2.all() + condition3.all()
+    h_id_list = [house.id for house in ignore_houses]
+    ignore_id_list = list(set(h_id_list))
+
+    # 过滤掉忽略的房屋
+    houses = houses.filter(House.id.notin_(ignore_id_list))
+    house_info = [house.to_dict() for house in houses]
+
+    return jsonify(code=status_code.OK, house_info=house_info)
 
 
 @house_blueprint.route('/myhouse/', methods=['GET'])
@@ -53,7 +91,7 @@ def my_house():
 @house_blueprint.route('/all_houses/', methods=['GET'])
 @login_required
 def all_houses():
-
+    """所有房屋的信息"""
     user_id = session['user_id']
     all_houses = House.query.filter(House.user_id==user_id).all()
     houses = [house.to_dict() for house in all_houses]
@@ -165,7 +203,7 @@ def house_detail(id):
 
 @house_blueprint.route('/booking/', methods=['GET'])
 def booking():
-
+    """订单页面"""
     return render_template('booking.html')
 
 

@@ -3,6 +3,10 @@ var next_page = 1; // 下一页
 var total_page = 1;  // 总页数
 var house_data_querying = true;   // 是否正在向后台获取数据
 
+function goBack() {
+    history.go(-1);
+}
+
 // 解析url中的查询字符串
 function decodeQuery(){
     var search = decodeURI(document.location.search);
@@ -48,6 +52,9 @@ function updateHouseData(action) {
 }
 
 $(document).ready(function(){
+
+    getAreas();
+
     var queryData = decodeQuery();
     var startDate = queryData["sd"];
     var endDate = queryData["ed"];
@@ -60,58 +67,58 @@ $(document).ready(function(){
 
 
     // 获取筛选条件中的城市区域信息
-    $.get("/api/v1_0/areas", function(data){
-        if (data.errno == 0) {
-            // 用户从首页跳转到这个搜索页面时可能选择了城区，所以尝试从url的查询字符串参数中提取用户选择的城区
-            var areaId = queryData["aid"];
-            // 如果提取到了城区id的数据
-            if (areaId) {
-                // 遍历从后端获取到的城区信息，添加到页面中
-                for (var i=0; i<data.data.areas.length; i++) {
-                    // 对于从url查询字符串参数中拿到的城区，在页面中做高亮展示
-                    // 后端获取到城区id是整型，从url参数中获取到的是字符串类型，所以将url参数中获取到的转换为整型，再进行对比
-                    areaId = parseInt(areaId);
-                    if (data.data.areas[i].aid == areaId) {
-                        $(".filter-area").append('<li area-id="'+ data.data.areas[i].aid+'" class="active">'+ data.data.areas[i].aname+'</li>');
-                    } else {
-                        $(".filter-area").append('<li area-id="'+ data.data.areas[i].aid+'">'+ data.data.areas[i].aname+'</li>');
-                    }
-                }
-            } else {
-                // 如果url参数中没有城区信息，不需要做额外处理，直接遍历展示到页面中
-                for (var i=0; i<data.data.areas.length; i++) {
-                    $(".filter-area").append('<li area-id="'+ data.data.areas[i].aid+'">'+ data.data.areas[i].aname+'</li>');
-                }
-            }
-            // 在页面添加好城区选项信息后，更新展示房屋列表信息
-            updateHouseData("renew");
-            // 获取页面显示窗口的高度
-            var windowHeight = $(window).height();
-            // 为窗口的滚动添加事件函数
-            window.onscroll=function(){
-                // var a = document.documentElement.scrollTop==0? document.body.clientHeight : document.documentElement.clientHeight;
-                var b = document.documentElement.scrollTop==0? document.body.scrollTop : document.documentElement.scrollTop;
-                var c = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
-                // 如果滚动到接近窗口底部
-                if(c-b<windowHeight+50){
-                    // 如果没有正在向后端发送查询房屋列表信息的请求
-                    if (!house_data_querying) {
-                        // 将正在向后端查询房屋列表信息的标志设置为真，
-                        house_data_querying = true;
-                        // 如果当前页面数还没到达总页数
-                        if(cur_page < total_page) {
-                            // 将要查询的页数设置为当前页数加1
-                            next_page = cur_page + 1;
-                            // 向后端发送请求，查询下一页房屋数据
-                            updateHouseData();
-                        } else {
-                            house_data_querying = false;
-                        }
-                    }
-                }
-            }
-        }
-    });
+    // $.get("/api/v1_0/areas", function(data){
+    //     if (data.errno == 0) {
+    //         // 用户从首页跳转到这个搜索页面时可能选择了城区，所以尝试从url的查询字符串参数中提取用户选择的城区
+    //         var areaId = queryData["aid"];
+    //         // 如果提取到了城区id的数据
+    //         if (areaId) {
+    //             // 遍历从后端获取到的城区信息，添加到页面中
+    //             for (var i=0; i<data.data.areas.length; i++) {
+    //                 // 对于从url查询字符串参数中拿到的城区，在页面中做高亮展示
+    //                 // 后端获取到城区id是整型，从url参数中获取到的是字符串类型，所以将url参数中获取到的转换为整型，再进行对比
+    //                 areaId = parseInt(areaId);
+    //                 if (data.data.areas[i].aid == areaId) {
+    //                     $(".filter-area").append('<li area-id="'+ data.data.areas[i].aid+'" class="active">'+ data.data.areas[i].aname+'</li>');
+    //                 } else {
+    //                     $(".filter-area").append('<li area-id="'+ data.data.areas[i].aid+'">'+ data.data.areas[i].aname+'</li>');
+    //                 }
+    //             }
+    //         } else {
+    //             // 如果url参数中没有城区信息，不需要做额外处理，直接遍历展示到页面中
+    //             for (var i=0; i<data.data.areas.length; i++) {
+    //                 $(".filter-area").append('<li area-id="'+ data.data.areas[i].aid+'">'+ data.data.areas[i].aname+'</li>');
+    //             }
+    //         }
+    //         // 在页面添加好城区选项信息后，更新展示房屋列表信息
+    //         updateHouseData("renew");
+    //         // 获取页面显示窗口的高度
+    //         var windowHeight = $(window).height();
+    //         // 为窗口的滚动添加事件函数
+    //         window.onscroll=function(){
+    //             // var a = document.documentElement.scrollTop==0? document.body.clientHeight : document.documentElement.clientHeight;
+    //             var b = document.documentElement.scrollTop==0? document.body.scrollTop : document.documentElement.scrollTop;
+    //             var c = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+    //             // 如果滚动到接近窗口底部
+    //             if(c-b<windowHeight+50){
+    //                 // 如果没有正在向后端发送查询房屋列表信息的请求
+    //                 if (!house_data_querying) {
+    //                     // 将正在向后端查询房屋列表信息的标志设置为真，
+    //                     house_data_querying = true;
+    //                     // 如果当前页面数还没到达总页数
+    //                     if(cur_page < total_page) {
+    //                         // 将要查询的页数设置为当前页数加1
+    //                         next_page = cur_page + 1;
+    //                         // 向后端发送请求，查询下一页房屋数据
+    //                         updateHouseData();
+    //                     } else {
+    //                         house_data_querying = false;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // });
 
     $(".input-daterange").datepicker({
         format: "yyyy-mm-dd",
@@ -161,4 +168,25 @@ $(document).ready(function(){
             $(".filter-title-bar>.filter-title").eq(2).children("span").eq(0).html($(this).html());
         }
     })
-})
+});
+
+
+// 查询
+$.get('/house/house_search/' + location.search, function (msg) {
+    console.log(msg);
+    if (msg.code == 200) {
+        var house_html = template('house-list-tmpl', {houses: msg.house_info});
+        $('.house-list').append(house_html);
+    }
+
+});
+// 地区信息
+function getAreas(){
+   $.get('/house/area_facility/', function (msg) {
+       console.log(msg);
+       var area_html = template('area-list-tmpl', {areas: msg.data.areas});
+       $('.area-list').append(area_html);
+
+    });
+};
+
