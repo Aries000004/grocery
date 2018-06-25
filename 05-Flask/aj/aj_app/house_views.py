@@ -162,7 +162,7 @@ def house_image():
     house_id = request.form.get('house_id')
     hosue_image = request.files.get('house_image')
 
-    save_url = os.path.join('/static/uoload/', house_image.filename)
+    save_url = os.path.join('/static/upload/', house_image.filename)
     house_image.save(save_url)
 
     image_url = os.path.join('upload', house_image.filename)

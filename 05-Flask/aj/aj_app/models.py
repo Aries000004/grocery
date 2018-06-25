@@ -175,9 +175,7 @@ class House(BaseModel, db.Model):
 
 class HouseImage(BaseModel, db.Model):
     """房屋图片"""
-
     __tablename__ = "ihome_house_image"
-
     id = db.Column(db.Integer, primary_key=True)
     # 房屋编号
     house_id = db.Column(db.Integer, db.ForeignKey("ihome_house.id"), nullable=False)
