@@ -69,5 +69,6 @@ configs = {
     'production': ProductionConfig  # 生产/线上模式
 }
 
+
 if __name__ == '__main__':
     print(os.path.dirname(os.path.abspath(__file__)))

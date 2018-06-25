@@ -85,7 +85,7 @@ def save_pay_result():
                                             current_app.config.get('ALIPAY_PUBLIC_KEY_PATH')),
         # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥, (先配置自己的公钥后，获取支付宝公钥)
         sign_type='RSA',  # RSA 或者 RSA2
-        debug=False  # 默认False ,沙箱模式debuf=True
+        debug=False  # 默认False ,沙箱模式debug=True
     )
 
     sign = payment_dict.pop('sign')
