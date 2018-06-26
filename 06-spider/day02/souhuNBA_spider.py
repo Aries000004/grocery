@@ -64,7 +64,6 @@ def start_crawl(seed_url, match_pattern, *, max_depth=-1):
                                 param_list.append((headings[0], links_list))
                     cursor.execute('insert into tb_result values (default, %s, %s)', param_list)
                     conn.commit()
-
     except Error:
         pass
     finally:
