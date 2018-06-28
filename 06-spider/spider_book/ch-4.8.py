@@ -13,7 +13,7 @@ import datetime
 import random
 import re
 
-from utils.agents import randomHeader
+from utils.spider_agents import random_header
 
 
 random.seed(datetime.datetime.now())
@@ -21,7 +21,7 @@ random.seed(datetime.datetime.now())
 
 def getLinks(articleUrl):
     articleUrl = 'https://en.wikipedia.org' + articleUrl
-    req = Request(articleUrl, headers=randomHeader())
+    req = Request(articleUrl, headers=random_header())
     html = urlopen(req).text
     bsObj = BeautifulSoup(html)
 
@@ -35,7 +35,7 @@ def getHistoryIPs(pageUrl):
     pageUrl = pageUrl.replace('/wiki/', '')
     historyUrl = 'http://en.wikipedia.org/w/index.php?title=' + pageUrl + '&action=history'
     print('historyUrl is : ' + historyUrl)
-    req = Request(historyUrl, headers=randomHeader())
+    req = Request(historyUrl, headers=random_header())
     html = urlopen(req).text
     bsObj = BeautifulSoup(html, 'parser.html')
     # 找出 class 属性是 ‘mw-anonuser’ 的链接
@@ -50,7 +50,7 @@ def getHistoryIPs(pageUrl):
 def getCountry(ipAddress):
     """获取 ipAddress 对应的国家， 通过免费的地图 API """
     try:
-        req = Request('http://freegeoip.net/json/' + ipAddress, headers=randomHeader())
+        req = Request('http://freegeoip.net/json/' + ipAddress, headers=random_header())
         response = urlopen(req).read().decode('utf-8')
     except Exception:
         return None

@@ -5,7 +5,7 @@ from urllib.request import urlopen
 from urllib.request import Request
 from bs4 import BeautifulSoup
 
-from utils.agents import randomHeader
+from utils.spider_agents import random_header
 
 
 # with open('test.csv', 'w+', encoding='utf-8') as f:
@@ -19,7 +19,7 @@ from utils.agents import randomHeader
 
 
 url = 'https://en.wikipedia.org/wiki/Compareison_of_text_editors'
-req = Request(url, headers=randomHeader())
+req = Request(url, headers=random_header())
 html = urlopen(req)
 bsObj = BeautifulSoup(html, 'parser.html')
 

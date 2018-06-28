@@ -13,7 +13,7 @@ from urllib.request import urlopen
 from urllib.request import Request
 from bs4 import BeautifulSoup
 
-from utils.agents import randomHeader
+from utils.spider_agents import random_header
 
 
 def getAbsoluteURL(baseUrl, source):
@@ -55,7 +55,7 @@ def main():
 
     baseurl = 'http://www.pythonscraping.com'
     downloadDirectory = 'downloaded'
-    req = Request(baseurl, headers=randomHeader())
+    req = Request(baseurl, headers=random_header())
     html = urlopen(req)
     bsObj = BeautifulSoup(html.text, 'parser.html')
     downloadList = bsObj.findAll(src=True)
