@@ -14,6 +14,18 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 
 
+def insert_db(page_html, db):
+    """获取页面数据， 将数据插入数据库"""
+    page = BeautifulSoup(page_html, 'lxml')  # 初始化 bs 对象
+    company_list = page.find_all('div', {'class', 'list_item_top'})  # 获取每页的公司列表
+    for company in company_list:  # 遍历 获取需要的信息
+        company_name = company.find("", {'class': "company_name"}).find('a').get_text()
+        job = company.find('h3').get_text()
+        salary = company.find('span', {'class': 'money'}).get_text()
+        # 插入数据库
+        db.lagou.insert({'公司：': company_name, '职位：': job, '工资：': salary})
+
+
 def get_html(url, keywords):
     """
      获取 页面 返回获取的页面列表
@@ -81,8 +93,7 @@ def get_html(url, keywords):
                 time.sleep(2)
                 # 获取页面
                 page_html = browser.page_source
-                # 页面添加到列表中
-                page_html_list.append(page_html)
+                yield page_html
                 # 一次获取成功 页码加 1
                 page_num += 1
                 # 判断下一页的 下一页  因为最后有 next 这个按钮， 判断 next 后还有没有元素 来终止循环
@@ -90,7 +101,6 @@ def get_html(url, keywords):
                     browser.find_element_by_xpath('//*[@id="s_position_list"]/div[2]/div/span[%s]' % str(page_num + 1))
                 except:
                     flag = False
-
             except:
                 retry_time += 1
                 print('第 %s 页，第 %s 尝试抓取！' % (page_num, retry_time))
@@ -99,7 +109,7 @@ def get_html(url, keywords):
                     page_num += 1
     # 关闭浏览器
     browser.quit()
-    return page_html_list
+    return False
 
 
 def main():
@@ -113,17 +123,12 @@ def main():
     url = 'https://www.lagou.com/'
     keywords = ['python']
     # keywords = ['python', '爬虫', '大数据']
-    page_html_list = get_html(url, keywords)  # 获取所有的网页信息
-    for page_html in page_html_list:
-        page = BeautifulSoup(page_html, 'lxml')   # 初始化 bs 对象
-        company_list = page.find_all('div', {'class', 'list_item_top'}) # 获取每页的公司列表
-        for company in company_list:  # 遍历 获取需要的信息
+    while True:
+        page_html = get_html(url, keywords)  # 获取网页信息
+        insert_db(next(page_html), db)
+        if not page_html:
+            break
 
-            company_name = company.find("", {'class': "company_name"}).find('a').get_text()
-            job = company.find('h3').get_text()
-            salary = company.find('span', {'class': 'money'}).get_text()
-            # 插入数据库
-            db.lagou.insert({'公司：': company_name, '职位：': job, '工资：': salary})
     print('获取拉钩网数据完毕！')
 
 

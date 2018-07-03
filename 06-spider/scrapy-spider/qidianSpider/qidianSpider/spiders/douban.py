@@ -1,23 +1,33 @@
 
 import scrapy
 from scrapy.selector import Selector
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spider import Rule, CrawlSpider
 
 from qidianSpider.items import DoubanspiderItem
 
 from utils.clearn_data import handle
 
-
-class DouBanSpider(scrapy.Spider):
+# 继承 CrawlSpider
+class DouBanSpider(CrawlSpider):
 
     name = 'douban'
 
-    def start_requests(self):
+    # 开始的url
+    start_urls = {
+        r'https://movie.douban.com/top250'
+    }
+    # 设置匹配规则
+    rules = (Rule(LinkExtractor(allow=r'https://movie.douban.com/top250.*'), callback='parse_item'), ) # 自定义的回调函数
 
-        for i in range(10):
-            url = r'https://movie.douban.com/top250?start=%s&filter=' % i * 25
-            yield scrapy.Request(url=url, callback=self.parse)
 
-    def parse(self, response):
+    # def start_requests(self):
+    #
+    #     for i in range(10):
+    #         url = r'https://movie.douban.com/top250?start=%s&filter=' % i * 25
+    #         yield scrapy.Request(url=url, callback=self.parse)
+
+    def parse_item(self, response):
 
         res = Selector(response)
         items = DoubanspiderItem()
