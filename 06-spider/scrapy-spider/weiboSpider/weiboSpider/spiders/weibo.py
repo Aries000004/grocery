@@ -1,41 +1,50 @@
 
 import scrapy
 import json
-from scrapy.selector import Selector
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spider import Rule, CrawlSpider
 
-from weiboSpider.items import WeibospiderItem
+from scrapy import Request
+
+from weiboSpider.items import WeiboUserItem
 
 
 class WeoboSpider(scrapy.Spider):
 
     name = 'weibo'
-    uid = '1831216671'
-
-    start_urls = {
-        r'https://m.weibo.cn/api/container/getIndex?uid=%s&containerid=100505%s' % (uid, uid)
-    }
-
+    user_url = r'https://m.weibo.cn/api/container/getIndex?uid={uid}&containerid=100505{uid}'
+    uids = [
+        '1831216671', # 黄磊
+        '1749127163', # 雷军
+    ]
 
     def start_requests(self):
-        pass
+        for uid in self.uids:
+            yield Request(self.user_url.format(uid=uid), callback=self.parse)
 
     def parse(self, response):
         data = json.loads(response.text)
-        userInfo = data['data']['userInfo']
-        id = userInfo['id']
-        name = userInfo['screen_name']
-        # 简介  职业 代表作
-        intro = userInfo['verified_reason']
-        # 他的关注 数量
-        follow_count = userInfo['follow_count']
-        # 他的粉丝数量
-        followers_count = userInfo['followers_count']
-        pass
+        if data['ok']:
+            userInfo = data['data']['userInfo']
+            user_item = WeiboUserItem()
+            # 需要的字段
+            need_params = (
+                'id',  # 用户 id
+                'screen_name', # 用户名
+                'profile_image_url',  #
+                'statuses_count',
+                'verified',
+                'gender',  # 性别
+                'verified_type',
+                'verified_type_ext',
+                'verified_reason',  # 微博认证
+                'close_blue_v',
+                'description',   # 个人简介
+                'follow_count',  # 关注的用户数
+                'followers_count',  # 粉丝数
+                'cover_image_phone',
+                'avatar_hd', # 头像
+            )
 
+            for key in need_params:
+                user_item[key] = userInfo.get(key)
 
-
-
-
-
+            return user_item

@@ -43,6 +43,5 @@ def main():
                 html = get_job_info(url)
 
 
-
 if __name__ == '__main__':
     main()

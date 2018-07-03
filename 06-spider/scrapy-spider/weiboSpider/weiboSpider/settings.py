@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'weiboSpider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'weiboSpider (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -64,9 +64,17 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'weiboSpider.pipelines.WeibospiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'weiboSpider.pipelines.UserCreateTimePipeline': 300,
+   # 'weiboSpider.pipelines.WeibospiderPipeline': 301,
+   'weiboSpider.pipelines.WeiboPymongoPipeline': 302,
+}
+# mongodb设置
+MONGO_HOST = '127.0.0.1'
+MONGO_PORT = 27017
+MONGO_DATABASE = 'spider'
+MONGO_COLLECTION = 'weibo'
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
