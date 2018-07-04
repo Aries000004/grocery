@@ -11,12 +11,15 @@ from datetime import datetime
 import pymongo
 from scrapy.conf import settings
 
+from weiboSpider.items import WeiboUserItem, UserFollowerItem, UserFansItem
+
 
 class UserCreateTimePipeline(object):
     """添加创建时间"""
 
     def process_item(self, item, spider):
-        item['create_time'] = datetime.now().strftime('%Y-%m-%d %H:%M')
+        if isinstance(item, WeiboUserItem):
+            item['create_time'] = datetime.now().strftime('%Y-%m-%d %H:%M')
         return item
 
 
@@ -36,6 +39,28 @@ class WeiboPymongoPipeline(object):
         self.collection = db[settings['MONGO_COLLECTION']]
 
     def process_item(self, item, spider):
-        self.collection.update({'id': item['id']}, {'$set': dict(item)}, upsert=True)
+
+        # 判断是保存用户还是 添加粉丝和 关注 关系
+        if isinstance(item, WeiboUserItem):
+            self.collection.update({'id': item['id']}, {'$set': dict(item)}, upsert=True)
+        # 插入关注
+        if isinstance(item, UserFollowerItem):
+            self.collection.update(
+                {'id': item['id']},
+                {'$addToSet': {
+                    'follower': {'$each': item['follower']}
+                }},
+                True
+            )
+        # 插入粉丝
+        if isinstance(item, UserFansItem):
+            self.collection.update(
+                {'id': item['id']},
+                {'$addToSet': {
+                    'fans': {'$each': item['fans']}
+                }},
+                True
+            )
+
         return item
 

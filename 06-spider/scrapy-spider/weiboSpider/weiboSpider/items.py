@@ -28,6 +28,21 @@ class WeiboUserItem(scrapy.Item):
     create_time = scrapy.Field()
 
 
-class WeiboFansSpider(scrapy.Item):
-    """用户的 粉丝 item """
-    pass
+class UserFollowerItem(scrapy.Item):
+    """粉丝 关注 和用户关系表"""
+
+    collections = 'weibo'
+
+    id = scrapy.Field()
+    follower = scrapy.Field()
+
+
+class UserFansItem(scrapy.Item):
+    """粉丝 关注 和用户关系表"""
+
+    collections = 'weibo'
+
+    id = scrapy.Field()
+    fans = scrapy.Field()
+
+
