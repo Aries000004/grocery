@@ -102,6 +102,7 @@
 #     def spider_opened(self, spider):
 #         spider.logger.info('Spider opened: %s' % spider.name)
 
+
 import random
 
 from scrapy.contrib.downloadermiddleware.useragent import UserAgentMiddleware
@@ -123,19 +124,3 @@ class RandomProxy(UserAgentMiddleware):
         proxy = random.choice(settings['PROXY'])
         # 添加到请求头中
         request.meta['proxy'] = 'http://%s' % proxy
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

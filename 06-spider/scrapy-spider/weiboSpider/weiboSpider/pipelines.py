@@ -63,4 +63,3 @@ class WeiboPymongoPipeline(object):
             )
 
         return item
-
