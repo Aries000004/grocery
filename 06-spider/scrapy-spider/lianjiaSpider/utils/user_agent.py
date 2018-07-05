@@ -57,3 +57,29 @@ USER_AGENT_LIST = [
     'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_5; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Chrome/9.0.597.15 Safari/534.13'
 ]
 
+
+# 代理 ip
+PROXY = [
+   '106.56.102.131:8070',
+   '221.228.17.172:8181',
+   '124.89.2.250:63000',
+   '101.236.19.165:8866',
+   '125.121.116.43:808',
+   '223.145.229.165:666',
+   '182.88.14.206:8123',
+   '183.128.240.76:666',
+   '117.86.9.145:18118',
+]
+
+import random
+import datetime
+
+
+random.seed(datetime.datetime.now())
+
+
+def random_agent():
+    agent = random.choice(USER_AGENT_LIST)
+    return agent
+
+
