@@ -11,7 +11,8 @@ import scrapy
 class LianjiaHouseItem(scrapy.Item):
 
     type = scrapy.Field()  # 新房还是二手房,或者其他
-    city = scrapy.Field()  # 城市区域
+    city = scrapy.Field()  # 城市
+    location = scrapy.Field()  # 区域
     create_time = scrapy.Field()  # 获取信息的时间
 
     house_code = scrapy.Field()  # 房屋编号
