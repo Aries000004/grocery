@@ -37,8 +37,3 @@ class LianjiaHouseItem(scrapy.Item):
     house_area = scrapy.Field()  # 房屋建面
 
     # 租房
-
-
-class MasterRedisItem(scrapy.Item):
-    """reddis 的url """
-    url = scrapy.Field()

@@ -7,7 +7,6 @@
 
 import datetime
 import pymongo
-import redis
 from scrapy.conf import settings
 
 
@@ -29,19 +28,13 @@ class LianjiaMongo(object):
 
     def process_item(self, item, spider):
         try:
-            # 表名  拼接 city 和 类型  二手房 成交 租房 新房
-            # collection = self.database[item['city'] + '_' + item['type']]
-            collection = self.database['test']
+            # 表名  拼接 city 和 type (二手房 成交 租房 新房)
+            collection = self.database[item['city'] + '_' + item['type']]
+            # collection = self.database['test']
             collection.update(
                 {'house_code': item['house_code']},
                 {'$set': dict(item)},
-                upsert=True
-            )
+                upsert=True)
         except:
             pass
         return item
-class Lianjiaredis(object):
-
-    def __init__(self):
-        redis.Redis(host=settings['REDIS_HOST'],
-                    port=settings['REDIS_PORT'])

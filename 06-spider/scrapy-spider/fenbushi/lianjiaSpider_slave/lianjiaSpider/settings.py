@@ -28,7 +28,7 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 # 下载延迟 时间
-DOWNLOAD_DELAY = 1
+# DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -69,7 +69,6 @@ DOWNLOADER_MIDDLEWARES = {
 ITEM_PIPELINES = {
    'lianjiaSpider.pipelines.LianjiaspiderPipeline': 300,
    'lianjiaSpider.pipelines.LianjiaMongo': 301,
-   'lianjiaSpider.pipelines.LianjiaReids': 302,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -106,6 +105,7 @@ MAX_PAGE = 101
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
 
+
 # scrapy-redis
 # REDIS_URL = 'redis://:yzd@127.0.0.1:6379'  # for master
 # # REDIS_URL = 'redis://:yzd@10.140.0.2:6379'  # for slave (master's ip)
@@ -115,8 +115,9 @@ REDIS_PORT = 6379
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 
 # 如果这一项设为True，那么在Redis中的URL队列不会被清理掉，
-# 但是在分布式爬虫共享URL时，要防止重复爬取。如果设为False，
-# 那么每一次读取URL后都会将其删掉，但弊端是爬虫暂停后重新启动，他会重新开始爬取。
+# 但是在分布式爬虫共享URL时，要防止重复爬取。
+# 如果设为False，那么每一次读取URL后都会将其删掉，
+# 但弊端是爬虫暂停后重新启动，他会重新开始爬取。
 SCHEDULER_PERSIST = True
 
 # REDIS_START_URLS_AS_SET指的是使用redis里面的set类型（简单完成去重），
