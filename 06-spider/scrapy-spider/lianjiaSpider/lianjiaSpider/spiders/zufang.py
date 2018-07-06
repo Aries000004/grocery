@@ -11,7 +11,7 @@ class LianJiaSpider(scrapy.Spider):
     name = 'zufang'
 
     # 允许访问的域名，爬取的域名
-    allowed_domains = ['lianjia.com']
+    # allowed_domains = ['lianjia.com']
 
     """
     北京(bj) 上海(sh) 深圳(sz) 成都(cd) 重庆(cq) 长沙(cs) 大连(dl) 德阳(dy) 广州(gz) 杭州(hz) 
@@ -19,14 +19,14 @@ class LianJiaSpider(scrapy.Spider):
     太原(ty) 武汉(wh) 厦门(xm) 西安(xa) 郑州(zz)
     """
     # 24 个 目标 城市
-    # cities = [
-    #     'bj', 'sh', 'sz', 'cd', 'cq', 'cs', 'dl', 'dy', 'gz',
-    #     'hz', 'hk', 'hf', 'jn', 'km', 'nj', 'qd', 'sz', 'sjz',
-    #     'sy', 'tj', 'ty', 'wh', 'xm', 'xa', 'zz',
-    # ]
+    cities = [
+        'bj', 'sh', 'sz', 'cd', 'cq', 'cs', 'dl', 'dy', 'gz',
+        'hz', 'hk', 'hf', 'jn', 'km', 'nj', 'qd', 'sz', 'sjz',
+        'sy', 'tj', 'ty', 'wh', 'xm', 'xa', 'zz',
+    ]
 
     # 测试城市
-    cities = ['cd']
+    # cities = ['cd']
 
    # 租房
     zufang_url = 'https://{city}.lianjia.com/zufang/'

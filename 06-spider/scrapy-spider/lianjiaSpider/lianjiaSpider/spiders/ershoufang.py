@@ -10,7 +10,7 @@ class LianJiaSpider(scrapy.Spider):
     name = 'ershoufang'
 
     # 允许访问的域名，爬取的域名
-    allowed_domains = ['lianjia.com']
+    # allowed_domains = ['lianjia.com']
 
     """
     北京(bj) 上海(sh) 深圳(sz) 成都(cd) 重庆(cq) 长沙(cs) 大连(dl) 德阳(dy) 广州(gz) 杭州(hz) 
